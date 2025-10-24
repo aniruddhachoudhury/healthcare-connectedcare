@@ -1,0 +1,27 @@
+{
+    "login": {
+      "title": "Welcome to Unified Health",
+      "subtitle": "Unifying fragmented healthcare across multiple personas.",
+      "role": "Select Your Role",
+      "userId": "User ID, Email, or Phone Number",
+      "password": "Password",
+      "loginButton": "Login",
+      "forgotPassword": "Forgot Password?",
+      "register": "Register"
+    },
+    "roles": {
+      "patient_cancer": "Patient Cancer Care",
+      "patient_diabetes": "Patient Diabetes",
+      "asha_worker": "Asha Worker",
+      "cloud_admin": "Cloud Admin",
+      "doctor_cancer": "Doctor (Cancer Specialist)",
+      "hospital_staff": "Hospital Staff",
+      "diagnostic_center": "Diagnostic Center",
+      "pharmacy": "Pharmacy",
+      "radiologist": "Radiologist"
+    },
+    "ads": {
+      "title": "Nearby Service Advertisements (Featured)"
+      }   
+  }
+  
