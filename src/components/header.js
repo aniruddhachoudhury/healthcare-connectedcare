@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Keyboard,
@@ -48,7 +48,6 @@ export function Header() {
   const [location, setLocation] = useState("Fetching location..");
   const [deviceInfo, setDeviceInfo] = useState("");
   const router = useRouter();
-  const params = useSearchParams();
 
   // Geolocation Effect
   useEffect(() => {
@@ -82,6 +81,7 @@ export function Header() {
   const onlanguagechange = (e) => {
     if (language !== e.target.value) {
       const nextLang = e.target.value;
+      localStorage.setItem('language', nextLang);
       setLanguage(e.target.value);
       const newParams = new URLSearchParams();
       newParams.set("language", nextLang);
