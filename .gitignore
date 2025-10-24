@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+*.log
+
+# Next.js build output
+.next/
+
+# Optional cache directories
+.cache/
