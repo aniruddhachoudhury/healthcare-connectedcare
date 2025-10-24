@@ -2,8 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 export function Hero() {
+
+  const getStarted  = ()=> {
+      redirect("/loginPage");
+  }
   return (
     <section className="relative overflow-hidden pt-20 pb-32 md:pt-32 md:pb-48">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-background to-secondary/10" />
@@ -61,6 +66,7 @@ export function Hero() {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/50 hover:scale-105 transition-all duration-300 text-primary-foreground font-semibold"
+                onClick = {getStarted}
               >
                 Get Started <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
