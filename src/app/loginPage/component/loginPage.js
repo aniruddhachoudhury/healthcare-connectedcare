@@ -1,6 +1,6 @@
 "use client";
+import React, { useState, useMemo } from "react";
 
-import React, { useState, useMemo, useEffect, Suspense } from "react";
 import {
   Keyboard,
   Scan,
@@ -27,7 +27,7 @@ import {
 import PatientDashboard from "../../patients/components/PatientDashboard";
 import DoctorDashboard from "../../doctor/component/DoctorDashboard";
 import { Header } from "../../../components/header";
-import { useSearchParams } from "next/navigation";
+import { getLanguage, useLanguage } from "@/lib/utils";
 
 // --- Global Translation Data ---
 const translations = {
@@ -1151,17 +1151,18 @@ const SegmentedAdsSection = ({ t, language }) => {
 // =================================================================
 
 export default function LoginPage() {
-  const params = useSearchParams();
-  const language = params.get("language");
+  // const params = useSearchParams();
   const [userRole, setUserRole] = useState(null); // Tracks the currently selected role/logged-in user's role
   const [userName, setUserName] = useState(null); // Tracks the logged-in user's name
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [showRegister, setShowRegister] = useState(false);
   const [showChatModal, setShowChatModal] = useState(false);
+  const language = useLanguage();
+ 
 
   // --- Geolocation and Device Info State ---
-  //   const [location, setLocation] = useState("Fetching location...");
+  //   const [location, setLocation] = useState("Fetching location...");`
   //   const [deviceInfo, setDeviceInfo] = useState("");
 
   //   // Geolocation Effect
@@ -1306,14 +1307,13 @@ export default function LoginPage() {
 
   // 3. Fallback to Login Page (when userRole is null or not authenticated)
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="min-h-screen flex flex-col bg-gray-50 font-sans text-black">
-        {/* Header */}
-        <header>
-          {/* <span className="font-bold text-xl">{t("platformTitle")}</span> */}
-          <Header></Header>
-          <div className="flex items-center space-x-4">
-            {/* <Globe className="w-5 h-5" />
+    <div className="min-h-screen flex flex-col bg-gray-50 font-sans text-black">
+      {/* Header */}
+      <header>
+        {/* <span className="font-bold text-xl">{t("platformTitle")}</span> */}
+        <Header></Header>
+        <div className="flex items-center space-x-4">
+          {/* <Globe className="w-5 h-5" />
           <select
             className="border-2 border-white rounded-full px-3 py-1 text-black bg-white cursor-pointer"
             value={language}
@@ -1324,177 +1324,176 @@ export default function LoginPage() {
             <option value="bn">বাংলা</option>
           </select> */}
 
-            {/* Location display - Added MapPin for clarity */}
-            {/* <span className="text-white text-sm font-semibold flex items-center">
+          {/* Location display - Added MapPin for clarity */}
+          {/* <span className="text-white text-sm font-semibold flex items-center">
             <MapPin className="w-4 h-4 mr-1" />
             {location}
           </span> */}
 
-            {/* Device info display */}
-            {/* <span className="text-white text-sm font-semibold">{deviceInfo}</span> */}
-          </div>
-        </header>
+          {/* Device info display */}
+          {/* <span className="text-white text-sm font-semibold">{deviceInfo}</span> */}
+        </div>
+      </header>
 
-        {/* Main Content Area */}
-        <main className="flex flex-1 max-w-7xl mx-auto w-full">
-          {/* Left: Login Form & Contact/Chatbot */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center justify-start p-8 order-2 lg:order-1">
-            <div className="w-full max-w-md">
-              {/* Login Form Card */}
-              <div className="p-8 bg-white rounded-2xl shadow-2xl border border-blue-100">
-                <h1 className="text-3xl font-bold mb-2 text-center text-black">
-                  {t("login.title")}
-                </h1>
-                <p className="text-sm text-center text-blue-600 mb-6">
-                  {t("login.subtitle")}
-                </p>
+      {/* Main Content Area */}
+      <main className="flex flex-1 max-w-7xl mx-auto w-full">
+        {/* Left: Login Form & Contact/Chatbot */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-start p-8 order-2 lg:order-1">
+          <div className="w-full max-w-md">
+            {/* Login Form Card */}
+            <div className="p-8 bg-white rounded-2xl shadow-2xl border border-blue-100">
+              <h1 className="text-3xl font-bold mb-2 text-center text-black">
+                {t("login.title")}
+              </h1>
+              <p className="text-sm text-center text-blue-600 mb-6">
+                {t("login.subtitle")}
+              </p>
 
-                <form onSubmit={handleLogin} className="space-y-4">
-                  {/* Role Selector */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">
-                      {t("login.role")}
-                    </label>
-                    <select
-                      value={userRole || ""} // Use userRole state for select, set to empty string if null
-                      onChange={(e) => handleUserSet(e.target.value, null)} // Only set role here, name is set upon successful login
-                      className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"
-                      required
-                    >
-                      <option value="">-- {t("login.role")} --</option>
-                      {allRoles.map((r) => (
-                        <option key={r} value={r}>
-                          {t(`roles.${r}`)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* User ID */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">
-                      <User className="w-4 h-4 inline mr-1 text-blue-500" />
-                      {t("login.userId")}
-                    </label>
-                    <input
-                      type="text"
-                      value={userId}
-                      onChange={(e) => setUserId(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
-                      placeholder="demo"
-                      required
-                    />
-                  </div>
-
-                  {/* Password */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">
-                      <Lock className="w-4 h-4 inline mr-1 text-blue-500" />
-                      {t("login.password")}
-                    </label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
-                      placeholder="demo"
-                      required
-                    />
-                  </div>
-
-                  {/* Login Button */}
-                  <button
-                    type="submit"
-                    disabled={!userRole}
-                    className={`w-full text-white font-semibold py-3 rounded-xl transition shadow-lg ${
-                      userRole
-                        ? "bg-blue-600 hover:bg-blue-700 cursor-pointer"
-                        : "bg-gray-400 cursor-not-allowed"
-                    }`}
+              <form onSubmit={handleLogin} className="space-y-4">
+                {/* Role Selector */}
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
+                    {t("login.role")}
+                  </label>
+                  <select
+                    value={userRole || ""} // Use userRole state for select, set to empty string if null
+                    onChange={(e) => handleUserSet(e.target.value, null)} // Only set role here, name is set upon successful login
+                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"
+                    required
                   >
-                    {t("login.loginButton")}
-                  </button>
+                    <option value="">-- {t("login.role")} --</option>
+                    {allRoles.map((r) => (
+                      <option key={r} value={r}>
+                        {t(`roles.${r}`)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                  {/* Links */}
-                  <div className="flex justify-between text-sm pt-2">
-                    <span
-                      className="text-blue-600 hover:underline cursor-pointer font-medium"
-                      onClick={() => setShowRegister(true)}
-                    >
-                      {t("login.register")}
-                    </span>
-                    <span className="text-gray-500 hover:text-black cursor-pointer">
-                      {t("login.forgotPassword")}
-                    </span>
-                  </div>
-                </form>
-              </div>
+                {/* User ID */}
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
+                    <User className="w-4 h-4 inline mr-1 text-blue-500" />
+                    {t("login.userId")}
+                  </label>
+                  <input
+                    type="text"
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
+                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="demo"
+                    required
+                  />
+                </div>
 
-              {/* Contact/Chatbot Card (placed below the login form) */}
-              <ContactChatbotCard t={t} setShowChatModal={setShowChatModal} />
-            </div>
-          </div>
+                {/* Password */}
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
+                    <Lock className="w-4 h-4 inline mr-1 text-blue-500" />
+                    {t("login.password")}
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="demo"
+                    required
+                  />
+                </div>
 
-          {/* Right: Advertisements (Live Feed) */}
-          <div className="w-full lg:w-1/2 flex flex-col items-start justify-start p-8 bg-blue-50 overflow-y-auto order-1 lg:order-2 shadow-inner">
-            <h2 className="text-2xl font-bold mb-4 text-blue-900 flex items-center">
-              <MapPin className="w-5 h-5 mr-2" /> {t("ads.title")}
-            </h2>
-            <div className="space-y-4 w-full">
-              {nearbyServices.map((s, idx) => {
-                const Icon = s.icon || MessageCircle;
-                return (
-                  <div
-                    key={idx}
-                    className="p-4 bg-white rounded-xl shadow border border-gray-200 text-sm hover:shadow-lg transition cursor-pointer"
+                {/* Login Button */}
+                <button
+                  type="submit"
+                  disabled={!userRole}
+                  className={`w-full text-white font-semibold py-3 rounded-xl transition shadow-lg ${
+                    userRole
+                      ? "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                      : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                >
+                  {t("login.loginButton")}
+                </button>
+
+                {/* Links */}
+                <div className="flex justify-between text-sm pt-2">
+                  <span
+                    className="text-blue-600 hover:underline cursor-pointer font-medium"
+                    onClick={() => setShowRegister(true)}
                   >
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-black flex items-center">
-                        <Icon className="w-4 h-4 mr-2 text-blue-600" />
-                        {s.name}
-                      </h3>
-                      <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
-                        {s.distance} km
-                      </span>
-                    </div>
-                    <p className="text-gray-600 mt-1 flex items-center space-x-4">
-                      <span>
-                        Google:{" "}
-                        <span className="font-bold text-yellow-600">
-                          {s.googleRating}
-                        </span>
-                        <Star className="w-3 h-3 inline ml-0.5 fill-yellow-600" />
-                      </span>
-                      <span>
-                        Platform:{" "}
-                        <span className="font-bold text-blue-600">
-                          {s.platformRating}
-                        </span>
-                        <Star className="w-3 h-3 inline ml-0.5 fill-blue-600" />
-                      </span>
-                      <span className="text-blue-500 font-medium flex items-center">
-                        <Phone className="w-3 h-3 mr-1" />
-                        Call Now
-                      </span>
-                    </p>
-                  </div>
-                );
-              })}
+                    {t("login.register")}
+                  </span>
+                  <span className="text-gray-500 hover:text-black cursor-pointer">
+                    {t("login.forgotPassword")}
+                  </span>
+                </div>
+              </form>
             </div>
+
+            {/* Contact/Chatbot Card (placed below the login form) */}
+            <ContactChatbotCard t={t} setShowChatModal={setShowChatModal} />
           </div>
-        </main>
+        </div>
 
-        {/* Segmented Ads Section at the bottom */}
-        <SegmentedAdsSection t={t} language={language} />
+        {/* Right: Advertisements (Live Feed) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-start justify-start p-8 bg-blue-50 overflow-y-auto order-1 lg:order-2 shadow-inner">
+          <h2 className="text-2xl font-bold mb-4 text-blue-900 flex items-center">
+            <MapPin className="w-5 h-5 mr-2" /> {t("ads.title")}
+          </h2>
+          <div className="space-y-4 w-full">
+            {nearbyServices.map((s, idx) => {
+              const Icon = s.icon || MessageCircle;
+              return (
+                <div
+                  key={idx}
+                  className="p-4 bg-white rounded-xl shadow border border-gray-200 text-sm hover:shadow-lg transition cursor-pointer"
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-black flex items-center">
+                      <Icon className="w-4 h-4 mr-2 text-blue-600" />
+                      {s.name}
+                    </h3>
+                    <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                      {s.distance} km
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mt-1 flex items-center space-x-4">
+                    <span>
+                      Google:{" "}
+                      <span className="font-bold text-yellow-600">
+                        {s.googleRating}
+                      </span>
+                      <Star className="w-3 h-3 inline ml-0.5 fill-yellow-600" />
+                    </span>
+                    <span>
+                      Platform:{" "}
+                      <span className="font-bold text-blue-600">
+                        {s.platformRating}
+                      </span>
+                      <Star className="w-3 h-3 inline ml-0.5 fill-blue-600" />
+                    </span>
+                    <span className="text-blue-500 font-medium flex items-center">
+                      <Phone className="w-3 h-3 mr-1" />
+                      Call Now
+                    </span>
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </main>
 
-        {/* Modals */}
-        {showRegister && (
-          <OnboardingModal t={t} onClose={() => setShowRegister(false)} />
-        )}
-        {showChatModal && (
-          <ChatbotModal t={t} onClose={() => setShowChatModal(false)} />
-        )}
-      </div>
-    </Suspense>
+      {/* Segmented Ads Section at the bottom */}
+      <SegmentedAdsSection t={t} language={language} />
+
+      {/* Modals */}
+      {showRegister && (
+        <OnboardingModal t={t} onClose={() => setShowRegister(false)} />
+      )}
+      {showChatModal && (
+        <ChatbotModal t={t} onClose={() => setShowChatModal(false)} />
+      )}
+    </div>
   );
 }
