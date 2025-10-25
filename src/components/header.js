@@ -52,16 +52,16 @@ export function Header() {
           <Link href="#" className="hover:text-primary">
             {t("about")}
           </Link>
-          <Link href="#" className="hover:text-primary">
+          {/* <Link href="#" className="hover:text-primary">
             {t("features")}
           </Link>
           <Link href="#" className="hover:text-primary">
             {t("security")}
-          </Link>
+          </Link> */}
         </nav>
 
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 text-sm">
+          <div className="hidden sm:flex items-center gap-4 text-sm">
             <MapPin className="w-4 h-4 text-primary" />
             <span>{location}</span>
             <span>{deviceInfo}</span>
