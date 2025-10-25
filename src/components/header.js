@@ -46,6 +46,9 @@ export function Header() {
         </div>
 
         <nav className="hidden md:flex gap-6 text-sm font-medium">
+        <Link href="/" className="hover:text-primary">
+            {t("home")}
+          </Link>
           <Link href="#" className="hover:text-primary">
             {t("about")}
           </Link>
