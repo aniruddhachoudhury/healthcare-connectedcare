@@ -28,6 +28,7 @@ export function I18nProvider({ children }) {
   const changeLanguage = (lang) => {
     setLanguage(lang);
     localStorage.setItem("language", lang);
+    window.dispatchEvent(new CustomEvent("languageChange", { detail: lang }));
   };
 
   return (
