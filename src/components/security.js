@@ -1,28 +1,28 @@
 "use client";
 
 import { Shield, Lock, Users, CheckCircle2, Award } from "lucide-react";
+import { useI18n } from "@/context/i18n-context";
 
 export function Security() {
+  const { t } = useI18n();
+
   const trustPoints = [
     {
       icon: Lock,
-      title: "We don't sell your data",
-      description:
-        "We are fully aware of the sensitivity of your healthcare information and take data privacy extremely seriously. We go to great lengths to protect it and will never ever sell it to anyone.",
+      title: t("sec1Title"),
+      description: t("sec1Desc"),
       bgColor: "from-blue-50 to-blue-100",
     },
     {
       icon: Users,
-      title: "We never mix doctors' data with patients' data",
-      description:
-        "Our platform uses industry-grade firewalls and follows a stringent privacy policy designed to keep providers' data separate from patients' data.",
+      title: t("sec2Title"),
+      description: t("sec2Desc"),
       bgColor: "from-teal-50 to-teal-100",
     },
     {
       icon: Shield,
-      title: "Your data has only one owner. YOU!",
-      description:
-        "You have complete control and ownership of your health data. We provide the platform, but the data belongs to you.",
+      title: t("sec3Title"),
+      description: t("sec3Desc"),
       bgColor: "from-purple-50 to-purple-100",
     },
   ];
@@ -34,24 +34,23 @@ export function Security() {
   ];
 
   const patientSecurityPoints = [
-    "Your data is for your eyes only",
-    "No one at our platform can view your data",
-    "We do not send you messages without your permission",
-    "We send promotional messages with an option to opt out any time",
-    "We do not share data with any third party",
+    t("patient1"),
+    t("patient2"),
+    t("patient3"),
+    t("patient4"),
+    t("patient5"),
   ];
 
   const doctorSecurityPoints = [
-    "We do not have access to read or view your practice data",
-    "We do not share data with any third party",
-    "Doctors are in full control to decide what communication has to be sent to their patients",
-    "We follow stringent data policies to ensure users' privacy and security",
+    t("doctor1"),
+    t("doctor2"),
+    t("doctor3"),
+    t("doctor4"),
   ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-background via-slate-50 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Trust Points */}
         <div className="space-y-12 mb-20">
           {trustPoints.map((point, index) => {
             const Icon = point.icon;
@@ -80,10 +79,9 @@ export function Security() {
           })}
         </div>
 
-        {/* Security Badges Section */}
         <div className="bg-white rounded-3xl p-12 mb-20 shadow-lg border border-slate-100">
           <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">
-            Secure place for your health data
+            {t("securePlace")}
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {securityBadges.map((badge, index) => {
@@ -106,39 +104,36 @@ export function Security() {
           </div>
         </div>
 
-        {/* Patient & Doctor Security */}
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Patient Security */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-1 w-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
               <h4 className="text-2xl font-bold text-slate-900">
-                Data security for patients
+                {t("patientSecurityTitle")}
               </h4>
             </div>
             <ul className="space-y-4">
-              {patientSecurityPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-3">
+              {patientSecurityPoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
-                  <span className="text-slate-700">{point}</span>
+                  <span className="text-slate-700">{p}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Doctor Security */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-1 w-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
               <h4 className="text-2xl font-bold text-slate-900">
-                Data security for doctors
+                {t("doctorSecurityTitle")}
               </h4>
             </div>
             <ul className="space-y-4">
-              {doctorSecurityPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-3">
+              {doctorSecurityPoints.map((d, i) => (
+                <li key={i} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
-                  <span className="text-slate-700">{point}</span>
+                  <span className="text-slate-700">{d}</span>
                 </li>
               ))}
             </ul>

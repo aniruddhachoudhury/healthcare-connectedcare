@@ -3,43 +3,46 @@
 import { Card } from "@/components/ui/card";
 import { Video, MapPin, Beaker, Stethoscope } from "lucide-react";
 import Image from "next/image";
-
-const services = [
-  {
-    icon: Video,
-    title: "Instant Video Consultation",
-    description: "Connect within 60 secs",
-    bgColor: "from-blue-100 to-blue-50",
-    borderColor: "border-blue-200",
-    image: "/doctor-video-consultation-on-phone.jpg",
-  },
-  {
-    icon: MapPin,
-    title: "Find Doctors Near You",
-    description: "Confirmed appointments",
-    bgColor: "from-teal-100 to-teal-50",
-    borderColor: "border-teal-200",
-    image: "/professional-doctor-portrait-stethoscope.jpg",
-  },
-  {
-    icon: Beaker,
-    title: "Lab Tests",
-    description: "Safe and trusted lab tests",
-    bgColor: "from-purple-100 to-purple-50",
-    borderColor: "border-purple-200",
-    image: "/lab-technician-blood-test-sample.jpg",
-  },
-  {
-    icon: Stethoscope,
-    title: "Surgeries",
-    description: "Safe and trusted surgery centers",
-    bgColor: "from-indigo-100 to-indigo-50",
-    borderColor: "border-indigo-200",
-    image: "/female-surgeon-doctor-in-green-scrubs.jpg",
-  },
-];
+import { useI18n } from "@/context/i18n-context";
 
 export function Services() {
+  const { t } = useI18n();
+
+  const services = [
+    {
+      icon: Video,
+      title: t("service1Title"),
+      description: t("service1Desc"),
+      bgColor: "from-blue-100 to-blue-50",
+      borderColor: "border-blue-200",
+      image: "/doctor-video-consultation-on-phone.jpg",
+    },
+    {
+      icon: MapPin,
+      title: t("service2Title"),
+      description: t("service2Desc"),
+      bgColor: "from-teal-100 to-teal-50",
+      borderColor: "border-teal-200",
+      image: "/professional-doctor-portrait-stethoscope.jpg",
+    },
+    {
+      icon: Beaker,
+      title: t("service3Title"),
+      description: t("service3Desc"),
+      bgColor: "from-purple-100 to-purple-50",
+      borderColor: "border-purple-200",
+      image: "/lab-technician-blood-test-sample.jpg",
+    },
+    {
+      icon: Stethoscope,
+      title: t("service4Title"),
+      description: t("service4Desc"),
+      bgColor: "from-indigo-100 to-indigo-50",
+      borderColor: "border-indigo-200",
+      image: "/female-surgeon-doctor-in-green-scrubs.jpg",
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

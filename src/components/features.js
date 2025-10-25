@@ -2,63 +2,59 @@
 
 import { Card } from "@/components/ui/card";
 import { Users, Calendar, Headphones, Clock, Shield, Zap } from "lucide-react";
-
-const features = [
-  {
-    icon: Users,
-    title: "Expert Doctors",
-    description:
-      "Access a network of verified healthcare professionals across multiple specialties.",
-    color: "from-primary/20 to-primary/10",
-  },
-  {
-    icon: Calendar,
-    title: "Easy Scheduling",
-    description:
-      "Book appointments in seconds with real-time availability and instant confirmation.",
-    color: "from-secondary/20 to-secondary/10",
-  },
-  {
-    icon: Headphones,
-    title: "Dedicated Support",
-    description:
-      "Round-the-clock customer support to assist you with any questions or concerns.",
-    color: "from-accent/20 to-accent/10",
-  },
-  {
-    icon: Clock,
-    title: "Flexible Timing",
-    description:
-      "Choose appointment times that work best for your schedule, including weekends.",
-    color: "from-primary/20 to-primary/10",
-  },
-  {
-    icon: Shield,
-    title: "Secure & Private",
-    description:
-      "Your health data is encrypted and protected with industry-leading security.",
-    color: "from-secondary/20 to-secondary/10",
-  },
-  {
-    icon: Zap,
-    title: "Instant Results",
-    description:
-      "Get prescriptions and medical records delivered instantly to your inbox.",
-    color: "from-accent/20 to-accent/10",
-  },
-];
+import { useI18n } from "@/context/i18n-context";
 
 export function Features() {
+  const { t } = useI18n();
+
+  const features = [
+    {
+      icon: Users,
+      title: t("feature1Title"),
+      description: t("feature1Desc"),
+      color: "from-primary/20 to-primary/10",
+    },
+    {
+      icon: Calendar,
+      title: t("feature2Title"),
+      description: t("feature2Desc"),
+      color: "from-secondary/20 to-secondary/10",
+    },
+    {
+      icon: Headphones,
+      title: t("feature3Title"),
+      description: t("feature3Desc"),
+      color: "from-accent/20 to-accent/10",
+    },
+    {
+      icon: Clock,
+      title: t("feature4Title"),
+      description: t("feature4Desc"),
+      color: "from-primary/20 to-primary/10",
+    },
+    {
+      icon: Shield,
+      title: t("feature5Title"),
+      description: t("feature5Desc"),
+      color: "from-secondary/20 to-secondary/10",
+    },
+    {
+      icon: Zap,
+      title: t("feature6Title"),
+      description: t("feature6Desc"),
+      color: "from-accent/20 to-accent/10",
+    },
+  ];
+
   return (
     <section className="py-20 md:py-32 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-            Why Choose Cloud Connect?
+            {t("featuresTitle")}
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-            Experience healthcare booking like never before with our
-            comprehensive platform.
+            {t("featuresSubtitle")}
           </p>
         </div>
 

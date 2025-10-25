@@ -1,11 +1,15 @@
 "use client";
 
+import { useI18n } from "@/context/i18n-context";
+
 export function Stats() {
+  const { t } = useI18n();
+
   const stats = [
-    { number: "50K+", label: "Happy Patients" },
-    { number: "500+", label: "Verified Doctors" },
-    { number: "98%", label: "Satisfaction Rate" },
-    { number: "24/7", label: "Support Available" },
+    { number: "50K+", label: t("patients") },
+    { number: "500+", label: t("doctors") },
+    { number: "98%", label: t("satisfaction") },
+    { number: "24/7", label: t("support") },
   ];
 
   return (

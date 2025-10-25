@@ -1,6 +1,10 @@
 "use client";
 
+import { useI18n } from "@/context/i18n-context";
+
 export function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="bg-foreground/5 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -11,70 +15,76 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary" />
               <span className="font-bold text-lg">Cloud Connect</span>
             </div>
-            <p className="text-sm text-foreground/60">
-              Making healthcare accessible to everyone, everywhere.
-            </p>
+            <p className="text-sm text-foreground/60">{t("footerAbout")}</p>
           </div>
 
-          {/* Links */}
+          {/* Product Links */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-foreground">Product</h4>
+            <h4 className="font-semibold text-foreground">
+              {t("footerProduct")}
+            </h4>
             <ul className="space-y-2 text-sm text-foreground/60">
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Features
+                  {t("features")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Pricing
+                  {t("pricing")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Security
+                  {t("security")}
                 </a>
               </li>
             </ul>
           </div>
 
+          {/* Company Links */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-foreground">Company</h4>
+            <h4 className="font-semibold text-foreground">
+              {t("footerCompany")}
+            </h4>
             <ul className="space-y-2 text-sm text-foreground/60">
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  About
+                  {t("about")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Blog
+                  {t("footerBlog")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Careers
+                  {t("footerCareers")}
                 </a>
               </li>
             </ul>
           </div>
 
+          {/* Legal Links */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-foreground">Legal</h4>
+            <h4 className="font-semibold text-foreground">
+              {t("footerLegal")}
+            </h4>
             <ul className="space-y-2 text-sm text-foreground/60">
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Privacy
+                  {t("footerPrivacy")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Terms
+                  {t("footerTerms")}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition">
-                  Contact
+                  {t("contact")}
                 </a>
               </li>
             </ul>
@@ -82,16 +92,16 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-foreground/60">
-          <p>&copy; 2025 Cloud Connect. All rights reserved.</p>
+          <p>© 2025 Cloud Connect. {t("allRights")}</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-foreground transition">
-              Twitter
+              {t("footerTwitter")}
             </a>
             <a href="#" className="hover:text-foreground transition">
-              LinkedIn
+              {t("footerLinkedIn")}
             </a>
             <a href="#" className="hover:text-foreground transition">
-              Facebook
+              {t("footerFacebook")}
             </a>
           </div>
         </div>

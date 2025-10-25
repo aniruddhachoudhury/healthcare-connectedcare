@@ -1,4 +1,5 @@
 import "./globals.css";
+import { I18nProvider } from "@/context/i18n-context";
 
 export const metadata = {
   title: "Connected Cloud TreatMent",
@@ -10,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
       >
-        {children}
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );
