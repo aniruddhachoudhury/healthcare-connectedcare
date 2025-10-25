@@ -840,28 +840,28 @@ const ChatbotModal = ({ t, onClose }) => {
   );
 };
 
-// --- Contact & Chatbot Card ---
-const ContactChatbotCard = ({ t, setShowChatModal }) => (
-  <div className="p-6 bg-blue-50 rounded-xl shadow-inner space-y-4 border border-blue-200 mt-4">
-    <h3 className="text-xl font-bold text-blue-900 flex items-center">
-      <MessageCircle className="w-5 h-5 mr-2" /> {t("chat.connectUs")}
-    </h3>
-    <p className="text-gray-600 flex items-center">
-      <Phone className="w-4 h-4 mr-2" />
-      {t("chat.phone")}
-    </p>
-    <p className="text-gray-600 flex items-center">
-      <User className="w-4 h-4 mr-2" />
-      {t("chat.email")}
-    </p>
-    <button
-      onClick={() => setShowChatModal(true)}
-      className="text-sm text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition duration-150 shadow-md cursor-pointer"
-    >
-      {t("chat.startChat")}
-    </button>
-  </div>
-);
+// // --- Contact & Chatbot Card ---
+// const ContactChatbotCard = ({ t, setShowChatModal }) => (
+//   <div className="p-6 bg-blue-50 rounded-xl shadow-inner space-y-4 border border-blue-200 mt-4">
+//     <h3 className="text-xl font-bold text-blue-900 flex items-center">
+//       <MessageCircle className="w-5 h-5 mr-2" /> {t("chat.connectUs")}
+//     </h3>
+//     <p className="text-gray-600 flex items-center">
+//       <Phone className="w-4 h-4 mr-2" />
+//       {t("chat.phone")}
+//     </p>
+//     <p className="text-gray-600 flex items-center">
+//       <User className="w-4 h-4 mr-2" />
+//       {t("chat.email")}
+//     </p>
+//     <button
+//       onClick={() => setShowChatModal(true)}
+//       className="text-sm text-white bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition duration-150 shadow-md cursor-pointer"
+//     >
+//       {t("chat.startChat")}
+//     </button>
+//   </div>
+// );
 
 // --- Multi-Input Onboarding Modal Component ---
 const OnboardingModal = ({ t, onClose }) => {
@@ -1161,40 +1161,6 @@ export default function LoginPage() {
   const [showChatModal, setShowChatModal] = useState(false);
   const language = useLanguage();
 
-  // --- Geolocation and Device Info State ---
-  //   const [location, setLocation] = useState("Fetching location...");`
-  //   const [deviceInfo, setDeviceInfo] = useState("");
-
-  //   // Geolocation Effect
-  //   useEffect(() => {
-  //     if ("geolocation" in navigator) {
-  //       navigator.geolocation.getCurrentPosition(
-  //         (position) => {
-  //           const { latitude, longitude } = position.coords;
-  //           setLocation(
-  //             `Lat: ${latitude.toFixed(2)}, Lon: ${longitude.toFixed(2)}`
-  //           );
-  //         },
-  //         (error) => {
-  //           // Update location to indicate the reason for failure (e.g., permission denied)
-  //           if (error.code === error.PERMISSION_DENIED) {
-  //             setLocation("Location blocked (Permission Denied)");
-  //           } else {
-  //             setLocation("Location unavailable");
-  //           }
-  //         }
-  //       );
-  //     } else {
-  //       setLocation("Geolocation not supported");
-  //     }
-  //   }, []);
-
-  //   // Device Info Effect
-  //   useEffect(() => {
-  //     setDeviceInfo(getDeviceInfo());
-  //   }, []);
-  // -----------------------------------------------------------------
-
   // Use custom translation hook
   const { t } = useTranslationMock(language);
 
@@ -1312,174 +1278,194 @@ export default function LoginPage() {
       <header>
         {/* <span className="font-bold text-xl">{t("platformTitle")}</span> */}
         <Header></Header>
-        <div className="flex items-center space-x-4">
-          {/* <Globe className="w-5 h-5" />
-          <select
-            className="border-2 border-white rounded-full px-3 py-1 text-black bg-white cursor-pointer"
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-          >
-            <option value="en">English</option>
-            <option value="hi">हिंदी</option>
-            <option value="bn">বাংলা</option>
-          </select> */}
-
-          {/* Location display - Added MapPin for clarity */}
-          {/* <span className="text-white text-sm font-semibold flex items-center">
-            <MapPin className="w-4 h-4 mr-1" />
-            {location}
-          </span> */}
-
-          {/* Device info display */}
-          {/* <span className="text-white text-sm font-semibold">{deviceInfo}</span> */}
-        </div>
       </header>
 
       {/* Main Content Area */}
       <main className="flex flex-1 max-w-7xl mx-auto w-full">
-        {/* Left: Login Form & Contact/Chatbot */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center justify-start p-8 order-2 lg:order-1">
-          <div className="w-full max-w-md">
-            {/* Login Form Card */}
-            <div className="p-8 bg-white rounded-2xl shadow-2xl border border-blue-100">
-              <h1 className="text-3xl font-bold mb-2 text-center text-black">
-                {t("login.title")}
-              </h1>
-              <p className="text-sm text-center text-blue-600 mb-6">
-                {t("login.subtitle")}
-              </p>
-
-              <form onSubmit={handleLogin} className="space-y-4">
-                {/* Role Selector */}
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700">
-                    {t("login.role")}
-                  </label>
-                  <select
-                    value={userRole || ""} // Use userRole state for select, set to empty string if null
-                    onChange={(e) => handleUserSet(e.target.value, null)} // Only set role here, name is set upon successful login
-                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"
-                    required
-                  >
-                    <option value="">-- {t("login.role")} --</option>
-                    {allRoles.map((r) => (
-                      <option key={r} value={r}>
-                        {t(`roles.${r}`)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* User ID */}
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700">
-                    <User className="w-4 h-4 inline mr-1 text-blue-500" />
-                    {t("login.userId")}
-                  </label>
-                  <input
-                    type="text"
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="demo"
-                    required
-                  />
-                </div>
-
-                {/* Password */}
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700">
-                    <Lock className="w-4 h-4 inline mr-1 text-blue-500" />
-                    {t("login.password")}
-                  </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="demo"
-                    required
-                  />
-                </div>
-
-                {/* Login Button */}
-                <button
-                  type="submit"
-                  disabled={!userRole}
-                  className={`w-full text-white font-semibold py-3 rounded-xl transition shadow-lg ${
-                    userRole
-                      ? "bg-blue-600 hover:bg-blue-700 cursor-pointer"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                >
-                  {t("login.loginButton")}
-                </button>
-
-                {/* Links */}
-                <div className="flex justify-between text-sm pt-2">
-                  <span
-                    className="text-blue-600 hover:underline cursor-pointer font-medium"
-                    onClick={() => setShowRegister(true)}
-                  >
-                    {t("login.register")}
-                  </span>
-                  <span className="text-gray-500 hover:text-black cursor-pointer">
-                    {t("login.forgotPassword")}
-                  </span>
-                </div>
-              </form>
-            </div>
-
-            {/* Contact/Chatbot Card (placed below the login form) */}
-            <ContactChatbotCard t={t} setShowChatModal={setShowChatModal} />
-          </div>
-        </div>
-
-        {/* Right: Advertisements (Live Feed) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-start justify-start p-8 bg-blue-50 overflow-y-auto order-1 lg:order-2 shadow-inner">
-          <h2 className="text-2xl font-bold mb-4 text-blue-900 flex items-center">
-            <MapPin className="w-5 h-5 mr-2" /> {t("ads.title")}
-          </h2>
-          <div className="space-y-4 w-full">
-            {nearbyServices.map((s, idx) => {
-              const Icon = s.icon || MessageCircle;
-              return (
-                <div
-                  key={idx}
-                  className="p-4 bg-white rounded-xl shadow border border-gray-200 text-sm hover:shadow-lg transition cursor-pointer"
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-black flex items-center">
-                      <Icon className="w-4 h-4 mr-2 text-blue-600" />
-                      {s.name}
-                    </h3>
-                    <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
-                      {s.distance} km
-                    </span>
-                  </div>
-                  <p className="text-gray-600 mt-1 flex items-center space-x-4">
-                    <span>
-                      Google:{" "}
-                      <span className="font-bold text-yellow-600">
-                        {s.googleRating}
-                      </span>
-                      <Star className="w-3 h-3 inline ml-0.5 fill-yellow-600" />
-                    </span>
-                    <span>
-                      Platform:{" "}
-                      <span className="font-bold text-blue-600">
-                        {s.platformRating}
-                      </span>
-                      <Star className="w-3 h-3 inline ml-0.5 fill-blue-600" />
-                    </span>
-                    <span className="text-blue-500 font-medium flex items-center">
-                      <Phone className="w-3 h-3 mr-1" />
-                      Call Now
-                    </span>
+        <div className="container mx-auto px-4 py-6 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Left Column - Login Section */}
+            <div className="w-full space-y-4">
+              {/* Login Card */}
+              <div className="bg-white rounded-3xl shadow-md overflow-hidden">
+                {/* Header - Simple Purple Gradient */}
+                <div className="bg-gradient-to-r from-primary to-secondary p-6 text-center">
+                  <h1 className="text-2xl font-bold text-white mb-1">
+                    {t("login.title")}
+                  </h1>
+                  <p className="text-purple-100 text-sm">
+                    {t("login.subtitle")}
                   </p>
                 </div>
-              );
-            })}
+
+                {/* Form Content */}
+                <div className="p-6 space-y-4">
+                  {/* Role Selection */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("login.role")}
+                    </label>
+                    <select
+                      value={userRole || ""} // Use userRole state for select, set to empty string if null
+                      onChange={(e) => handleUserSet(e.target.value, null)} // Only set role here, name is set upon successful login
+                      className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"
+                      required
+                    >
+                      <option value="">{t("login.role")}</option>
+                      <option value="patient">👤 {t("roles.patient")}</option>
+                      <option value="doctor">👨‍⚕️ {t("roles.doctor")}</option>
+                      <option value="nurse">👩‍⚕️ {t("roles.nurse")}</option>
+                      <option value="admin">🔧 {t("roles.admin")}</option>
+                      <option value="lab_tech">🔬 {t("roles.labTech")}</option>
+                      <option value="pharmacist">
+                        💊 {t("roles.pharmacist")}
+                      </option>
+                    </select>
+                  </div>
+
+                  {/* User ID Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("login.userId")}
+                    </label>
+                    <input
+                      type="text"
+                      value={userId}
+                      onChange={(e) => setUserId(e.target.value)}
+                      placeholder="demo"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all text-gray-700"
+                    />
+                  </div>
+
+                  {/* Password Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("login.password")}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full border border-gray-300 rounded-md px-3 py-3 focus:ring-blue-500 focus:border-blue-500 transition"
+                        placeholder="demo"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Login Button */}
+                  <button
+                    onClick={handleLogin}
+                    disabled={!userId || !password || !setUserRole}
+                    className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-[1.01] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {t("login.loginButton")}
+                  </button>
+
+                  {/* Footer Links */}
+                  <div className="flex justify-between items-center pt-2">
+                    <button className="text-purple-600 hover:text-purple-700 font-medium text-sm hover:underline">
+                      {t("login.register")}
+                    </button>
+                    <button className="text-gray-600 hover:text-gray-700 text-sm hover:underline">
+                      {t("login.forgotPassword")}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chatbot Section */}
+              <div className="bg-white rounded-2xl shadow-md p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <MessageCircle className="w-5 h-5 text-gray-600" />
+                  <h3 className="text-base font-semibold text-gray-800">
+                    {t("chat.connectUs")}
+                  </h3>
+                </div>
+                <div className="space-y-2 mb-3 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <span> {t("chat.phone")}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4" />
+                    <span>{t("chat.email")}</span>
+                  </div>
+                </div>
+                <button className="w-full py-2.5 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors text-sm" onClick={() => setShowChatModal(true)}>
+                  {t("chat.startChat")}
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column - Nearby Services */}
+            <div className="w-full">
+              <div className="bg-white rounded-3xl shadow-md overflow-hidden">
+                {/* Header */}
+                <div className="bg-white border-b border-gray-200 p-5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-red-500" />
+                      <h2 className="text-lg font-bold text-gray-800">
+                        {t("ads.title")}
+                      </h2>
+                    </div>
+                    <div className="bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      LIVE FEED
+                    </div>
+                  </div>
+                </div>
+
+                {/* Services List */}
+                <div className="p-5 space-y-3 max-h-[640px] overflow-y-auto">
+                  {nearbyServices.map((service, idx) => {
+                    const Icon = service.icon || MessageCircle;
+                    return (
+                      <div
+                        key={idx}
+                        className="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-md transition-shadow"
+                      >
+                        <div className="flex items-start gap-3">
+                          <Icon className="w-4 h-4 mr-2 text-blue-600" />
+                          <h3 className="font-semibold text-gray-900 mb-2 text-sm leading-tight">
+                            {service.name}
+                          </h3>
+                        </div>
+                        {/* Ratings */}
+                        <div className="flex items-center gap-3 mb-2 text-xs">
+                          <div className="flex items-center gap-1">
+                            <span className="text-gray-600">Google:</span>
+                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                            <span className="font-semibold text-gray-700">
+                              {service.googleRating}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <span className="text-gray-600">Platform:</span>
+                            <Star className="w-3 h-3 fill-blue-400 text-blue-400" />
+                            <span className="font-semibold text-gray-700">
+                              {service.platformRating}
+                            </span>
+                          </div>
+                          <div className="bg-purple-100 px-2.5 py-1.5 rounded-xl">
+                            <span className="text-purple-700 font-semibold text-xs">
+                              {service.distance} km
+                            </span>
+                          </div>
+                          <div>
+                            <button className="px-3 py-1.5 bg-green-500 text-white text-xs font-medium rounded-lg hover:bg-green-600 transition-colors flex items-center gap-1.5">
+                              <Phone className="w-3 h-3 mr-1" />
+                              Call Now
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
