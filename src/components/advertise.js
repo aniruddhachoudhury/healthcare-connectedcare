@@ -167,12 +167,12 @@ const SegmentedAdsCards = ({ segmentedAds, t }) => {
               <h2 className={`text-3xl font-semibold ${config.textColor}`}>
                 {segment.title}
               </h2>
-              <button
+              {/* <button
                 onClick={handleClose}
                 className={`${config.iconColor} hover:opacity-90 text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium shadow-md`}
               >
                 ✕ Close
-              </button>
+              </button> */}
             </div>
 
             {/* Horizontal Scroll Container */}
