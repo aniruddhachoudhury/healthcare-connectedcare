@@ -28,6 +28,7 @@ import PatientDashboard from "../../patients/components/PatientDashboard";
 import DoctorDashboard from "../../doctor/component/DoctorDashboard";
 import { Header } from "../../../components/header";
 import { getLanguage, useLanguage } from "@/lib/utils";
+import SegmentedAdsCards from "@/components/advertise";
 
 // --- Global Translation Data ---
 const translations = {
@@ -1159,7 +1160,6 @@ export default function LoginPage() {
   const [showRegister, setShowRegister] = useState(false);
   const [showChatModal, setShowChatModal] = useState(false);
   const language = useLanguage();
- 
 
   // --- Geolocation and Device Info State ---
   //   const [location, setLocation] = useState("Fetching location...");`
@@ -1485,7 +1485,11 @@ export default function LoginPage() {
       </main>
 
       {/* Segmented Ads Section at the bottom */}
-      <SegmentedAdsSection t={t} language={language} />
+      {/* <SegmentedAdsSection t={t} language={language} /> */}
+      <SegmentedAdsCards
+        segmentedAds={populateSegmentedAds(t, language)}
+        t={t}
+      />
 
       {/* Modals */}
       {showRegister && (

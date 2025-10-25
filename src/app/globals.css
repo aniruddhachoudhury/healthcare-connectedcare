@@ -124,3 +124,82 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* @keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease;
+} */
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+/* Animated border glow effect */
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
+  50% { box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+}
+
+.border-glow-blue {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #3b82f6;
+}
+
+.border-glow-purple {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #a855f7;
+}
+
+.border-glow-green {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #22c55e;
+}
+
+.border-glow-red {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #ef4444;
+}
+
+.border-glow-orange {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #f97316;
+}
+
+.border-glow-indigo {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #6366f1;
+}
+
+.border-glow-pink {
+  animation: borderGlow 2s ease-in-out infinite;
+  color: #ec4899;
+}
